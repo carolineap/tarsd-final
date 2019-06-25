@@ -24,7 +24,13 @@ Vagrant.configure(2) do |config|
     service.vm.provision "shell" do |s|
         s.inline = "sudo apt update"
         s.inline = "sudo apt -y upgrade"
-        s.inline = "./install.sh"
+        s.inline = "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -"
+        s.inline = "sudo apt-key fingerprint 0EBFCD88"
+        s.inline = "sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'"
+        s.inline = "sudo apt update"
+        s.inline = "sudo apt -y install docker-ce docker-ce-cli containerd.io"
+        s.inline = "sudo systemctl start docker"
+        s.inline = "sudo systemctl enable docker"
     end
 
   end
@@ -44,7 +50,13 @@ Vagrant.configure(2) do |config|
     monitoring.vm.provision "shell" do |s|
         s.inline = "sudo apt update"
         s.inline = "sudo apt -y upgrade"
-        s.inline = "./install.sh"
+        s.inline = "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -"
+        s.inline = "sudo apt-key fingerprint 0EBFCD88"
+        s.inline = "sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'"
+        s.inline = "sudo apt update"
+        s.inline = "sudo apt -y install docker-ce docker-ce-cli containerd.io"
+        s.inline = "sudo systemctl start docker"
+        s.inline = "sudo systemctl enable docker"
     end
 
   end
