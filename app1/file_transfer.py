@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
+import os
 
 DIRECTORY = ''
 
@@ -9,16 +10,15 @@ def upload():
     
     if request.method == 'POST':
 
-        name = request.form('name')
-        content = request.form('content')
-
+        name = request.form.get('name')
+        content = request.form.get('content')
+        print(name)
         if name:
-
             file = open(os.path.join(DIRECTORY, name), 'w')
             file.write(content)
 
 
-@app.route('/files/<name:name>', methods=['GET'])
+@app.route('/files/<name>', methods=['GET'])
 def download(name):
 
     return send_from_directory(directory=DIRECTORY, filename=name, as_attachment=True)
