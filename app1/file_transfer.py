@@ -12,10 +12,13 @@ def upload():
 
         name = request.form.get('name')
         content = request.form.get('content')
-        print(name)
         if name:
             file = open(os.path.join(DIRECTORY, name), 'w')
             file.write(content)
+            return ("Success\n")
+
+        else:
+            return ("Failed\n")
 
 
 @app.route('/files/<name>', methods=['GET'])
